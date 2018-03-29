@@ -1,0 +1,168 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="project2v3.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - ทุนการศึกษา มอ.ภูเก็ต</title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <%--Bootstrap CSS --%>
+    <link href="/content/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/content/icon-font/font/flaticon.css" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #5F5F5F">
+            <div class="container">
+                <a class="navbar-brand" href="/default.aspx">
+                    <img src="/Content/Image/logo8.gif" width="40" height="50" alt="" />
+                </a>
+                <a class="navbar-brand" href="/default.aspx">ทุนการศึกษา มอ.ภูเก็ต</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/default.aspx">หน้าหลัก <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDdGerneralFund" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ทุนทั่วไป
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDdGerneralFund">
+                                <a class="dropdown-item" href="/std_application.aspx">ทุนภายใน</a>
+                                <a class="dropdown-item" href="/outside_fund.aspx">ทุนภายนอก</a>
+                                <a class="dropdown-item" href="/std_add-time-table.aspx">บันทึกชั่วโมงทำงาน</a>
+                                <a class="dropdown-item" href="/std_select-work-area.aspx">เลือกสถานที่ทำงาน</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDdFund" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">กองทุน
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDdFund">
+                                <a class="dropdown-item" href="/loan1.aspx">ทุน กยศ.</a>
+                                <a class="dropdown-item" href="/loan2.aspx">ทุน กรอ.</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact.aspx">ติดต่อ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about.aspx">เกี่ยวกับเรา</a>
+                        </li>
+                    </ul>
+                    <%-- 
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><span class="oi oi-account-login"></span>Login</a></li>
+                    </ul> --%>
+
+                    <ul class="nav navbar-nav pull-right">
+                        <asp:LoginView runat="server" ViewStateMode="Disabled">
+                            <AnonymousTemplate>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a runat="server" href="~/Account/Register">Register</a></li>
+                                    <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                                </ul>
+                            </AnonymousTemplate>
+                            <LoggedInTemplate>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                    <li>
+                                        <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                    </li>
+                                </ul>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <br />
+        <br />
+        <br />
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <br />
+        <footer class="page-footer center-on-small-only stylish-color-dark" style="background-color: #5F5F5F">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5 class="title mb-4 mt-3" style="color: #f2f3f4">ทุนการศึกษา มอ.ภูเก็ต</h5>
+                        <p style="color: #d0d3d4">
+                            <asp:Image ID="Img_qr" runat="server" ImageUrl="~/Content/Image/qr.png" Width="50%" />
+                        </p>
+                    </div>
+                    <hr class="clearfix w-100 d-md-none" />
+                    <div class="col-md-4 mx-auto">
+                        <h5 class="title mb-4 mt-3" style="color: #f2f3f4">กองทุน</h5>
+                        <ul>
+                            <li><a href="https://www.studentloan.or.th/index.php/home">กองทุนให้กู้ยืมเพื่อการศึกษา</a></li>
+                            <li><a href="https://www.e-studentloan.ktb.co.th/STUDENT/ESLLogin.do">ตรวจสอบยอดหนี้ธนาคารกรุงไทย</a></li>
+                            <li><a href="https://www.e-studentloan.ibank.co.th/ESLLogin.do">ตรวจสอบยอดหนี้ธนาคารอิสลาม</a></li>
+                            <li><a href="https://eservices.studentloan.or.th/SLFSTUDENT/html/index.html">e-Studentloan</a></li>
+                        </ul>
+                    </div>
+                    <hr class="clearfix w-100 d-md-none" />
+                    <div class="col-md-4 mx-auto">
+                        <h5 class="title mb-4 mt-3" style="color: #f2f3f4">ที่ตั้งสำนักงาน</h5>
+                        <p style="color: #d0d3d4">
+                            สำนักงานหอพักนักศึกษาชาย 80/1 หมู่ 1 ถนนวิชิตสงคราม ตำบลกะทู้ อำเภอกะทู้ จังหวัดภูเก็ต 83120
+                        </p>
+                        <h5 class="title mb-4 mt-3" style="color: #f2f3f4">เวลาทำการ</h5>
+                        <p style="color: #d0d3d4">
+                            จันทร์-ศุกร์ เวลา 08.30-16.30 ยกเว้นวันหยุดราชการ
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="container text-center">
+                        <a href="https://www.facebook.com/%E0%B8%81%E0%B8%A2%E0%B8%A8%E0%B8%81%E0%B8%A3%E0%B8%AD%E0%B8%97%E0%B8%B8%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2-Phuket-Campus-1712062205743244/">
+                            <asp:Image ID="Img_facebook" runat="server" ImageUrl="~/Content/flaticon/001-facebook.png" />
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCwIdpHChzQJC1kq-N4Ri3CQ">
+                            <asp:Image ID="Img_youtube" runat="server" ImageUrl="~/Content/flaticon/002-youtube.png" />
+                        </a>
+                        <a href="mailto:patama.i@phuket.psu.ac.th">
+                            <asp:Image ID="Img_email" runat="server" ImageUrl="~/Content/flaticon/letter.png" />
+                        </a>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <p>&copy; <%: DateTime.Now.Year %><a href="http://www.phuket.psu.ac.th">Prince of Songkla University, Phuket Campus </a></p>
+                </div>
+            </div>
+        </footer>
+    </form>
+</body>
+</html>
